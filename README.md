@@ -1,2 +1,1 @@
-# tcc2
-repositorio pra ferramenta do TCC2
+PDF Filtering Tool For Academic Texts
