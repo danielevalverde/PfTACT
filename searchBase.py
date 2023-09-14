@@ -4,13 +4,11 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from io import BytesIO
 
-# Solicitar que o usuário insira os nomes dos arquivos PDF separados por espaços
 pdf_files_input = input("Insira os nomes dos arquivos PDF separados por espaços: ")
 
 # Dividir os nomes dos arquivos em uma lista
 pdf_files = pdf_files_input.split()
 
-# Solicitar que o usuário insira as palavras-chave separadas por espaços
 search_input = input("Insira as palavras-chave separadas por espaços: ")
 
 # Dividir as palavras-chave em uma lista
@@ -19,12 +17,8 @@ search_words = search_input.split()
 # Inicializar um dicionário para armazenar os arquivos que contêm cada palavra-chave
 files_with_keywords = {keyword: [] for keyword in search_words}
 
-# Nome do arquivo de saída TXT
 output_file = "output.txt"
-# Nome do arquivo de saída em PDF
 pdf_output_file = "output.pdf"
-
-# Nome do arquivo de saída em CSV
 csv_output_file = "output.csv"
 
 # Iterar pelos arquivos PDF
