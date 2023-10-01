@@ -1,4 +1,18 @@
 exemplo.pdf exemplo3.pdf exemplo2.pdf
+survey,engenharia,brasil,rodrigo,metodologia,ativas,greatest,reflexiva,edues, demandas dos
+
+Palavras-chave encontradas: survey, engenharia, brasil, rodrigo, ativas, edues
+
+Arquivo: exemplo2.pdf
+Palavras-chave encontradas: survey, engenharia, brasil, rodrigo, ativas, edues
+
+Arquivo: exemplo3.pdf
+Palavras-chave encontradas: engenharia, brasil, metodologia, ativas, greatest
+
+=====================
+
+
+exemplo.pdf exemplo3.pdf exemplo2.pdf
 survey engenharia brasil rodrigo metodologia ativas greatest reflexiva edues
 
 

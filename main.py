@@ -6,10 +6,10 @@ def main():
     pdf_files_input = input("Insira os nomes dos arquivos PDF separados por espaços: ")
     pdf_files = pdf_files_input.split()
 
-    search_input = input("Insira as palavras-chave separadas por espaços: ")
-    search_words = search_input.split()
+    strings_input = input("Insira as strings de busca separadas por vírgulas: ")
+    filter_strings = strings_input.split(',')
 
-    results_classifier = ResultsClassifier(pdf_files, search_words)
+    results_classifier = ResultsClassifier(pdf_files, filter_strings)
     results = results_classifier.classify_results()
 
     print(results)

@@ -1,23 +1,22 @@
 from pdf_reader import PDFFileReader
 
 class ResultsClassifier:
-    def __init__(self, pdf_files, search_words):
+    def __init__(self, pdf_files, filter_strings):
         self.pdf_files = pdf_files
-        self.search_words = search_words
+        self.filter_strings = filter_strings
 
     def classify_results(self):
-        files_with_keywords = {pdf_path: [] for pdf_path in self.pdf_files}
+        files_with_filters = {pdf_path: [] for pdf_path in self.pdf_files}
         
         for pdf_path in self.pdf_files:
             pdf_reader = PDFFileReader(pdf_path)
             extracted_text = pdf_reader.extract_text()
 
-            keywords_found = [keyword for keyword in self.search_words if keyword.lower() in extracted_text.lower()]
-            files_with_keywords[pdf_path] = keywords_found
+            for filter_string in self.filter_strings:
+                if filter_string.strip().lower() in extracted_text.lower():
+                    files_with_filters[pdf_path].append(filter_string.strip())
 
-        # Classificar o dicionário com base na quantidade de palavras-chave satisfeitas
-        sorted_results_list = sorted(files_with_keywords.items(), key=lambda item: len(item[1]), reverse=True)
-        
-        sorted_results = dict(sorted_results_list)
+        # Classificar o dicionário com base na presença das strings de filtro
+        sorted_results = {k: v for k, v in sorted(files_with_filters.items(), key=lambda item: len(item[1]), reverse=True)}
         
         return sorted_results
