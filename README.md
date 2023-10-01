@@ -1,7 +1,7 @@
 PDF Filtering Tool For Academic Texts
 
 to run: 
-python3 search.py 
+python3 main.py 
 
 Users will be asked to provide: 
 
