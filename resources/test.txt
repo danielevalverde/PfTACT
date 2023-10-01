@@ -1,14 +1,18 @@
-exemplo.pdf exemplo3.pdf exemplo2.pdf
-survey,engenharia,brasil,rodrigo,metodologia,ativas,greatest,reflexiva,edues, demandas dos
+exemplo.pdf exemplo3.pdf exemplo4.pdf exemplo2.pdf exemplo5.pdf
+survey, engenharia, brasil, ativas, reflexiva, edues, demandas dos, exigem escalabilidade, deste modo, auxilia, critérios definidos, excluído, foram avaliados e direcionados, educação, experiências, aproximação da academia, através da análise, systematic literature review, software engineering
 
-Palavras-chave encontradas: survey, engenharia, brasil, rodrigo, ativas, edues
+Palavras-chave encontradas (8): engenharia, brasil, metodologia, ativas, reflexiva, deste modo, auxilia, foram avaliados e direcionados
+
+Arquivo: exemplo.pdf
+Palavras-chave encontradas (7): survey, engenharia, brasil, ativas, edues, demandas dos, exigem escalabilidade
 
 Arquivo: exemplo2.pdf
-Palavras-chave encontradas: survey, engenharia, brasil, rodrigo, ativas, edues
+Palavras-chave encontradas (7): survey, engenharia, brasil, ativas, edues, demandas dos, exigem escalabilidade
 
-Arquivo: exemplo3.pdf
-Palavras-chave encontradas: engenharia, brasil, metodologia, ativas, greatest
 
+
+: palavras com x nao estao sendo encontradas?
+reflexiva, exigem escalabilidade 
 =====================
 
 

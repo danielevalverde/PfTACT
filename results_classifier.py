@@ -1,26 +1,49 @@
 import pdfplumber
-import unidecode
+from datetime import datetime
 
 class ResultsClassifier:
     def __init__(self, pdf_files, filter_strings):
         self.pdf_files = pdf_files
         self.filter_strings = [filter_string.strip().lower() for filter_string in filter_strings]
-        self.normalized_filter_strings = [unidecode.unidecode(filter_string) for filter_string in self.filter_strings]
+
+    def extract_metadata(self, pdf_path):
+        with pdfplumber.open(pdf_path) as pdf:
+            metadata = pdf.metadata
+        return metadata
+
+    def format_date(self, date_str):
+        # O formato padrão é "D:YYYYMMDDHHmmSSOHH'mm'"
+        # Vamos remover o "D:" e os caracteres ' e " e depois formatar
+        date_str = date_str.replace("D:", "").replace("'", "").replace("\"", "")
+        # Converter a data em um objeto datetime
+        date_obj = datetime.strptime(date_str, '%Y%m%d%H%M%S%z')
+        # Formatar a data em um formato legível
+        return date_obj.strftime('%Y-%m-%d %H:%M:%S %Z')
 
     def classify_results(self):
         files_with_filters = {pdf_path: [] for pdf_path in self.pdf_files}
         keywords_count = {pdf_path: 0 for pdf_path in self.pdf_files}
 
         for pdf_path in self.pdf_files:
+            metadata = self.extract_metadata(pdf_path)
+            print("Metadata for", pdf_path)
+            for key, value in metadata.items():
+                # Verifica se a chave é "ModDate" (Data de Modificação)
+                if key == "ModDate":
+                    # Converte o valor da data para um formato legível
+                    value = self.format_date(value)
+                print(f"{key}: {value}")
+            print()
+            
             with pdfplumber.open(pdf_path) as pdf:
                 extracted_text = ""
                 for page in pdf.pages:
                     extracted_text += page.extract_text()
                 
-                extracted_text = unidecode.unidecode(extracted_text.lower())
+                extracted_text = extracted_text.lower()
 
                 for i, filter_string in enumerate(self.filter_strings):
-                    if self.normalized_filter_strings[i] in extracted_text:
+                    if filter_string in extracted_text:
                         files_with_filters[pdf_path].append(filter_string.strip())
                         keywords_count[pdf_path] += 1
 
