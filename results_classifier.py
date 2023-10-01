@@ -4,7 +4,8 @@ import unidecode
 class ResultsClassifier:
     def __init__(self, pdf_files, filter_strings):
         self.pdf_files = pdf_files
-        self.filter_strings = [unidecode.unidecode(filter_string.strip().lower()) for filter_string in filter_strings]
+        self.filter_strings = [filter_string.strip().lower() for filter_string in filter_strings]
+        self.normalized_filter_strings = [unidecode.unidecode(filter_string) for filter_string in self.filter_strings]
 
     def classify_results(self):
         files_with_filters = {pdf_path: [] for pdf_path in self.pdf_files}
@@ -18,8 +19,8 @@ class ResultsClassifier:
                 
                 extracted_text = unidecode.unidecode(extracted_text.lower())
 
-                for filter_string in self.filter_strings:
-                    if filter_string in extracted_text:
+                for i, filter_string in enumerate(self.filter_strings):
+                    if self.normalized_filter_strings[i] in extracted_text:
                         files_with_filters[pdf_path].append(filter_string.strip())
                         keywords_count[pdf_path] += 1
 
