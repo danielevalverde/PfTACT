@@ -5,12 +5,12 @@ from io import BytesIO
 
 class OutputFormatter:
     @staticmethod
-    def format_results(results, output_format):
+    def format_results(results, keywords_count, output_format):
         if output_format == "1":
             for file, keywords_found in results.items():
                 if keywords_found:
                     print(f"Arquivo: {file}")
-                    print(f"Palavras-chave encontradas: {', '.join(keywords_found)}")
+                    print(f"Palavras-chave encontradas ({keywords_count[file]}): {', '.join(keywords_found)}")
                     print()
         elif output_format == "2":
             output_file = "output.txt"

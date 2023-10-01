@@ -1,4 +1,4 @@
-from pdf_reader import PDFFileReader
+# from pdf_reader import PDFFileReader
 from results_classifier import ResultsClassifier
 from output_formatter import OutputFormatter
 
@@ -7,12 +7,10 @@ def main():
     pdf_files = pdf_files_input.split()
 
     strings_input = input("Insira as strings de busca separadas por vírgulas: ")
-    filter_strings = strings_input.split(',')
+    filter_strings = [filter_string.strip() for filter_string in strings_input.split(',')]
 
     results_classifier = ResultsClassifier(pdf_files, filter_strings)
-    results = results_classifier.classify_results()
-
-    print(results)
+    results, keywords_count = results_classifier.classify_results()
 
     output_format = input("Escolha o formato de saída:\n"
                       "1. Terminal\n"
@@ -22,7 +20,7 @@ def main():
                       "Digite o número correspondente ao formato desejado: ")
 
     output_formatter = OutputFormatter()
-    output_formatter.format_results(results, output_format)
+    output_formatter.format_results(results, keywords_count, output_format)
 
 if __name__ == "__main__":
     main()

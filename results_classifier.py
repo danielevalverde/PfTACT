@@ -1,22 +1,28 @@
-from pdf_reader import PDFFileReader
+import pdfplumber
+import unidecode
 
 class ResultsClassifier:
     def __init__(self, pdf_files, filter_strings):
         self.pdf_files = pdf_files
-        self.filter_strings = filter_strings
+        self.filter_strings = [unidecode.unidecode(filter_string.strip().lower()) for filter_string in filter_strings]
 
     def classify_results(self):
         files_with_filters = {pdf_path: [] for pdf_path in self.pdf_files}
-        
+        keywords_count = {pdf_path: 0 for pdf_path in self.pdf_files}
+
         for pdf_path in self.pdf_files:
-            pdf_reader = PDFFileReader(pdf_path)
-            extracted_text = pdf_reader.extract_text()
+            with pdfplumber.open(pdf_path) as pdf:
+                extracted_text = ""
+                for page in pdf.pages:
+                    extracted_text += page.extract_text()
+                
+                extracted_text = unidecode.unidecode(extracted_text.lower())
 
-            for filter_string in self.filter_strings:
-                if filter_string.strip().lower() in extracted_text.lower():
-                    files_with_filters[pdf_path].append(filter_string.strip())
+                for filter_string in self.filter_strings:
+                    if filter_string in extracted_text:
+                        files_with_filters[pdf_path].append(filter_string.strip())
+                        keywords_count[pdf_path] += 1
 
-        # Classificar o dicionário com base na presença das strings de filtro
         sorted_results = {k: v for k, v in sorted(files_with_filters.items(), key=lambda item: len(item[1]), reverse=True)}
         
-        return sorted_results
+        return sorted_results, keywords_count
