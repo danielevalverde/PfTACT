@@ -5,17 +5,24 @@ from io import BytesIO
 
 class OutputFormatter:
     @staticmethod
-    def format_results(results, keywords_count, output_format):
+    def format_results(results, keywords_count, output_format, operator, qtd_strings):
         if output_format == "1":
             for file, keywords_found in results.items():
-                if keywords_found:
-                    print(f"Arquivo: {file}")
-                    print(f"Palavras-chave encontradas ({keywords_count[file]}): {', '.join(keywords_found)}")
-                    print()
+                if operator == "e":
+                    print('entrou no if')
+                    if len(keywords_found) < qtd_strings:
+                        print(f"Arquivo: {file}")
+                        print("Busca não satisfeita.")
+                        print(len(keywords_found), qtd_strings)
                 else:
-                    print(f"Arquivo: {file}")
-                    print("Nenhuma palavra-chave encontrada.")
-                    print()
+                    if keywords_found:
+                        print(f"Arquivo: {file}")
+                        print(f"Palavras-chave encontradas ({keywords_count[file]}): {', '.join(keywords_found)}")
+                        print()
+                    else:
+                        print(f"Arquivo: {file}")
+                        print("Nenhuma palavra-chave encontrada.")
+                        print()
         elif output_format == "2":
             output_file = "output.txt"
             with open(output_file, 'w') as out_file:

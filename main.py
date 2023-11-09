@@ -1,4 +1,3 @@
-# from pdf_reader import PDFFileReader
 from results_classifier import ResultsClassifier
 from output_formatter import OutputFormatter
 
@@ -8,6 +7,10 @@ def main():
 
     strings_input = input("Insira as strings de busca separadas por vírgulas: ")
     filter_strings = [filter_string.strip() for filter_string in strings_input.split(',')]
+    
+    qtd_strings = len(filter_strings)
+
+    operator = input("Escolha o operador da busca: e/ou: ")
 
     results_classifier = ResultsClassifier(pdf_files, filter_strings)
     results, keywords_count = results_classifier.classify_results()
@@ -20,7 +23,7 @@ def main():
                       "Digite o número correspondente ao formato desejado: ")
 
     output_formatter = OutputFormatter()
-    output_formatter.format_results(results, keywords_count, output_format)
+    output_formatter.format_results(results, keywords_count, output_format, operator, qtd_strings)
 
 if __name__ == "__main__":
     main()

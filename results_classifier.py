@@ -12,10 +12,7 @@ class ResultsClassifier:
         return metadata
 
     def format_date(self, date_str):
-        # O formato padrão é "D:YYYYMMDDHHmmSSOHH'mm'"
-        # Vamos remover o "D:" e os caracteres ' e " e depois formatar
         date_str = date_str.replace("D:", "").replace("'", "").replace("\"", "")
-        # Converter a data em um objeto datetime
         date_obj = datetime.strptime(date_str, '%Y%m%d%H%M%S%z')
         # Formatar a data em um formato legível
         return date_obj.strftime('%Y-%m-%d %H:%M:%S %Z')
@@ -28,9 +25,7 @@ class ResultsClassifier:
             metadata = self.extract_metadata(pdf_path)
             print("Metadata for", pdf_path)
             for key, value in metadata.items():
-                # Verifica se a chave é "ModDate" (Data de Modificação)
                 if key == "ModDate":
-                    # Converte o valor da data para um formato legível
                     value = self.format_date(value)
                 print(f"{key}: {value}")
             print()
