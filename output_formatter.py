@@ -14,7 +14,7 @@ class OutputFormatter:
                         print(f"Arquivo: {file}")
                         print("Busca não satisfeita.")
                         print(len(keywords_found), qtd_strings)
-                else:
+                elif operator == "ou":
                     if keywords_found:
                         print(f"Arquivo: {file}")
                         print(f"Palavras-chave encontradas ({keywords_count[file]}): {', '.join(keywords_found)}")
@@ -32,7 +32,7 @@ class OutputFormatter:
                         if len(keywords_found) < qtd_strings:
                             out_file.write(f"Arquivo: {file}\n")
                             out_file.write("Busca não satisfeita.\n\n")
-                    else:
+                    elif operator == "ou":
                         out_file.write(f"Arquivo: {file}\n")
                         if keywords_found:
                             out_file.write(f"Palavras-chave encontradas: {', '.join(keywords_found)}\n\n")
@@ -48,7 +48,7 @@ class OutputFormatter:
                     if operator == "e":
                         if len(keywords_found) < qtd_strings:
                             csv_writer.writerow([file, "Busca não satisfeita"])
-                    else:
+                    elif operator == "ou":
                         if keywords_found:
                             csv_writer.writerow([file, ', '.join(keywords_found)])
                         else:
@@ -66,7 +66,7 @@ class OutputFormatter:
                 if operator == "e":
                     if len(keywords_found) < qtd_strings:
                         c.drawString(100, y_position, f"Busca não satisfeita:")
-                else:
+                elif operator == "ou":
                     if keywords_found:
                         c.drawString(100, y_position, f"Palavras-chave encontradas: {', '.join(keywords_found)}")
                     else:
