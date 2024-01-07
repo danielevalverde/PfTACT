@@ -18,6 +18,7 @@ class OutputFormatter:
                     if keywords_found:
                         print(f"Arquivo: {file}")
                         print(f"Palavras-chave encontradas ({keywords_count[file]}): {', '.join(keywords_found)}")
+                        print(len(keywords_found), qtd_strings)
                         print()
                     else:
                         print(f"Arquivo: {file}")

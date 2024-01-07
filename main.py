@@ -10,9 +10,14 @@ def main():
     
     qtd_strings = len(filter_strings)
 
-    operator = input("Escolha o operador da busca: e/ou: ")
+    operator = input("Escolha o operador da busca: e/ou or not: ")
+    if operator == "not":
+        not_strings_input = input("Insira as strings de busca separadas por vírgulas: ")
+        not_strings = [not_string.strip() for not_string in not_strings_input.split(',')]
+    else:
+        not_strings = None
 
-    results_classifier = ResultsClassifier(pdf_files, filter_strings)
+    results_classifier = ResultsClassifier(pdf_files, filter_strings, operator, not_strings)
     results, keywords_count = results_classifier.classify_results()
 
     output_format = input("Escolha o formato de saída:\n"
