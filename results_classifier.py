@@ -2,10 +2,10 @@ import pdfplumber
 from datetime import datetime
 
 class ResultsClassifier:
-    def __init__(self, pdf_files, filter_strings, operator=None, not_strings=None):
+    def __init__(self, pdf_files, filter_strings, operator_not=None, not_strings=None):
         self.pdf_files = pdf_files
         self.filter_strings = [filter_string.strip().lower() for filter_string in filter_strings]
-        self.operator = operator
+        self.operator_not = operator_not
         self.not_strings = [not_string.strip().lower() for not_string in not_strings] if not_strings else []
 
     def extract_metadata(self, pdf_path):
@@ -41,7 +41,7 @@ class ResultsClassifier:
                 # tem que contar a qtd de estrings filtradas e do not no for
                 
                 found_not_string = False
-                if self.operator == "not":
+                if self.operator_not == "yes":
                     for not_string in self.not_strings:
                         if not_string in extracted_text:
                             found_not_string = True

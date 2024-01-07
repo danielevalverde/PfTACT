@@ -4,20 +4,21 @@ from output_formatter import OutputFormatter
 def main():
     pdf_files_input = input("Insira os nomes dos arquivos PDF separados por espaços: ")
     pdf_files = pdf_files_input.split()
+    operator = input("escolha o operador da busca: e/ou: ")
 
     strings_input = input("Insira as strings de busca separadas por vírgulas: ")
     filter_strings = [filter_string.strip() for filter_string in strings_input.split(',')]
     
     qtd_strings = len(filter_strings)
 
-    operator = input("Escolha o operador da busca: e/ou or not: ")
-    if operator == "not":
+    operator_not = input("deseja adicionar o operador not?: yes/no: ")
+    if operator_not == "yes":
         not_strings_input = input("Insira as strings de busca separadas por vírgulas: ")
         not_strings = [not_string.strip() for not_string in not_strings_input.split(',')]
     else:
         not_strings = None
 
-    results_classifier = ResultsClassifier(pdf_files, filter_strings, operator, not_strings)
+    results_classifier = ResultsClassifier(pdf_files, filter_strings, operator_not, not_strings)
     results, keywords_count = results_classifier.classify_results()
 
     output_format = input("Escolha o formato de saída:\n"
