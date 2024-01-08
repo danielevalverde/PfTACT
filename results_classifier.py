@@ -26,10 +26,16 @@ class ResultsClassifier:
         for pdf_path in self.pdf_files:
             # metadata = self.extract_metadata(pdf_path)
             # print("Metadata for", pdf_path)
+            # key_mapping = {
+            #   "Title": "Title",
+            #   "ModDate": "Modification Date",
+            #   "Author": "Author",
+            # }
             # for key, value in metadata.items():
-            #     if key == "ModDate":
-            #         value = self.format_date(value)
-            #     print(f"{key}: {value}")
+            #     if key in key_mapping:
+            #         if key == "ModDate":
+            #             value = self.format_date(value)
+            #         print(f"{key}: {value}")
             # print()
             
             # Extract text from the PDF
